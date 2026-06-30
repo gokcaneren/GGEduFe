@@ -10,6 +10,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Eye, EyeOff, BookOpen, ArrowRight, Loader2 } from "lucide-react";
 import { authService } from "@/lib/auth";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const t = useTranslations();
@@ -18,6 +19,9 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState("");
+  // component içinde:
+const searchParams = useSearchParams();
+const registered = searchParams.get("registered");
 
   const loginSchema = z.object({
     email: z.string().email(t("validation.emailInvalid")),
@@ -101,7 +105,17 @@ export default function LoginPage() {
 
       {/* Sağ panel */}
       <div style={styles.rightPanel}>
+        
         <div style={styles.formWrapper}>
+          {registered === "true" && (
+  <div style={{
+    background: "#f0fdf4", border: "1px solid #bbf7d0",
+    borderRadius: "10px", padding: "12px 16px",
+    fontSize: "14px", color: "#16a34a", marginBottom: "8px",
+  }}>
+    ✓ {t("login.registeredSuccess")}
+  </div>
+)}
           <div style={styles.formHeader}>
             <h2 style={styles.formTitle}>{t("login.title")}</h2>
             <p style={styles.formSubtitle}>{t("login.subtitle")}</p>

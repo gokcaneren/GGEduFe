@@ -68,7 +68,9 @@ export default function Sidebar({ role, firstName, lastName }: SidebarProps) {
     router.push(`/${locale}/login`);
   };
 
-  const initials = `${firstName[0]}${lastName[0]}`.toUpperCase();
+  const initials = firstName && lastName
+  ? `${firstName[0]}${lastName[0]}`.toUpperCase()
+  : "?";
 
   return (
     <aside style={{ ...styles.sidebar, width: collapsed ? "72px" : "240px" }}>

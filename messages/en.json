@@ -22,7 +22,8 @@
     "submitting": "Signing in...",
     "noAccount": "Don't have an account?",
     "registerLink": "Sign up for free",
-    "errorDefault": "Sign in failed. Please check your credentials."
+    "errorDefault": "Sign in failed. Please check your credentials.",
+    "registeredSuccess": "Registration successful! You can now sign in."
   },
   "register": {
     "title": "Create an account",
@@ -133,14 +134,23 @@
 },
 "teacherStudents": {
   "title": "My Students",
-  "totalStudents": "{count} students following",
+  "tabSubscribers": "Subscribers",
+  "tabRequests": "Pending Requests",
+  "totalStudents": "{count} students",
   "searchPlaceholder": "Search by name...",
   "viewProfile": "View Profile",
-  "empty": "No students following yet.",
+  "empty": "No subscribed students yet.",
+  "emptyRequests": "No pending subscription requests.",
   "noResults": "No students found matching your search.",
   "prev": "Previous",
   "next": "Next",
-  "errorDefault": "Failed to load students."
+  "errorDefault": "Failed to load students.",
+  "accept": "Accept",
+  "reject": "Reject",
+  "deciding": "Processing...",
+  "decideError": "An error occurred.",
+  "accepted": "Accepted",
+  "rejected": "Rejected"
 },
 "teacherProfile": {
   "title": "My Profile",

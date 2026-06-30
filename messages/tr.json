@@ -22,7 +22,8 @@
     "submitting": "Giriş yapılıyor...",
     "noAccount": "Hesabın yok mu?",
     "registerLink": "Ücretsiz kaydol",
-    "errorDefault": "Giriş yapılamadı. Bilgilerinizi kontrol edin."
+    "errorDefault": "Giriş yapılamadı. Bilgilerinizi kontrol edin.",
+    "registeredSuccess": "Kayıt başarılı! Şimdi giriş yapabilirsin."
   },
   "register": {
     "title": "Hesap oluştur",
@@ -134,14 +135,23 @@
 },
 "teacherStudents": {
   "title": "Öğrencilerim",
-  "totalStudents": "{count} öğrenci takip ediyor",
+  "tabSubscribers": "Aboneler",
+  "tabRequests": "Bekleyen İstekler",
+  "totalStudents": "{count} öğrenci",
   "searchPlaceholder": "İsim ile ara...",
   "viewProfile": "Profili Gör",
-  "empty": "Henüz takipçi öğrenci bulunmuyor.",
+  "empty": "Henüz abone öğrenci bulunmuyor.",
+  "emptyRequests": "Bekleyen abonelik isteği bulunmuyor.",
   "noResults": "Arama kriterine uyan öğrenci bulunamadı.",
   "prev": "Önceki",
   "next": "Sonraki",
-  "errorDefault": "Öğrenciler yüklenirken bir hata oluştu."
+  "errorDefault": "Öğrenciler yüklenirken bir hata oluştu.",
+  "accept": "Onayla",
+  "reject": "Reddet",
+  "deciding": "İşleniyor...",
+  "decideError": "İşlem sırasında bir hata oluştu.",
+  "accepted": "Onaylandı",
+  "rejected": "Reddedildi"
 },
 "teacherProfile": {
   "title": "Profilim",

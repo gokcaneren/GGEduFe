@@ -20,32 +20,31 @@ export default function RegisterPage() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState("");
-  const [selectedRole, setSelectedRole] = useState<UserRole>(0);
+  const [selectedRole, setSelectedRole] = useState<boolean>(false); // false = Student
 
   const registerSchema = z
-    .object({
-      firstName: z.string().min(2, t("validation.firstNameMin")),
-      lastName: z.string().min(2, t("validation.lastNameMin")),
-      email: z.string().email(t("validation.emailInvalid")),
-      password: z
-        .string()
-        .min(8, t("validation.passwordMin8"))
-        .regex(/[A-Z]/, t("validation.passwordUppercase"))
-        .regex(/[0-9]/, t("validation.passwordNumber")),
-      confirmPassword: z.string(),
-      role: z.union([z.literal(0), z.literal(1)]),
-    })
-    .refine((d) => d.password === d.confirmPassword, {
-      message: t("validation.passwordsNoMatch"),
-      path: ["confirmPassword"],
-    });
+  .object({
+    firstName: z.string().min(2, t("validation.firstNameMin")),
+    lastName: z.string().min(2, t("validation.lastNameMin")),
+    email: z.string().email(t("validation.emailInvalid")),
+    password: z.string()
+      .min(8, t("validation.passwordMin8"))
+      .regex(/[A-Z]/, t("validation.passwordUppercase"))
+      .regex(/[0-9]/, t("validation.passwordNumber")),
+    confirmPassword: z.string(),
+    isTeacher: z.boolean(),
+  })
+  .refine((d) => d.password === d.confirmPassword, {
+    message: t("validation.passwordsNoMatch"),
+    path: ["confirmPassword"],
+  });
 
   type RegisterForm = z.infer<typeof registerSchema>;
 
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<RegisterForm>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: { role: 0 },
-  });
+  resolver: zodResolver(registerSchema),
+  defaultValues: { isTeacher: false },
+});
 
   const password = watch("password", "");
   const passwordChecks = {
@@ -54,35 +53,32 @@ export default function RegisterPage() {
     number: /[0-9]/.test(password),
   };
 
-  const handleRoleSelect = (role: UserRole) => {
-    setSelectedRole(role);
-    setValue("role", role);
-  };
+  const handleRoleSelect = (isTeacher: boolean) => {
+  setSelectedRole(isTeacher);
+  setValue("isTeacher", isTeacher);
+};
 
   const onSubmit = async (data: RegisterForm) => {
-    setIsLoading(true);
-    setApiError("");
-    try {
-      const response = await authService.register({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        password: data.password,
-        role: data.role,
-      });
-      authService.saveSession(response);
-      router.push(
-        response.user.role === 0
-          ? `/${locale}/dashboard/teacher`
-          : `/${locale}/dashboard/student`
-      );
-    } catch (error: unknown) {
-      const err = error as { response?: { data?: { message?: string } } };
-      setApiError(err.response?.data?.message || t("register.errorDefault"));
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  setIsLoading(true);
+  setApiError("");
+  try {
+    await authService.register({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+      gender: true, // TODO: forma gender seçimi eklenecek
+      isTeacher: data.isTeacher,
+    });
+    // Backend token döndürmüyor, login'e yönlendir
+    router.push(`/${locale}/login?registered=true`);
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: { message?: string } } };
+    setApiError(err.response?.data?.message || t("register.errorDefault"));
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div style={styles.container}>
@@ -134,26 +130,26 @@ export default function RegisterPage() {
 
           {/* Rol seçimi */}
           <div style={styles.roleRow}>
-            {([1, 0] as UserRole[]).map((role) => (
-              <button
-                key={role}
-                type="button"
-                onClick={() => handleRoleSelect(role)}
-                style={{ ...styles.roleBtn, ...(selectedRole === role ? styles.roleBtnActive : {}) }}
-              >
-                {role === 1
-                  ? <GraduationCap size={20} color={selectedRole === role ? "#2563eb" : "#94a3b8"} />
-                  : <Users size={20} color={selectedRole === role ? "#2563eb" : "#94a3b8"} />
-                }
-                <span style={{
-                  ...styles.roleBtnLabel,
-                  color: selectedRole === role ? "#1d4ed8" : "#64748b",
-                }}>
-                  {role === 1 ? t("register.roleStudent") : t("register.roleTeacher")}
-                </span>
-              </button>
-            ))}
-          </div>
+  {[false, true].map((isTeacher) => (
+    <button
+      key={String(isTeacher)}
+      type="button"
+      onClick={() => handleRoleSelect(isTeacher)}
+      style={{ ...styles.roleBtn, ...(selectedRole === isTeacher ? styles.roleBtnActive : {}) }}
+    >
+      {isTeacher
+        ? <Users size={20} color={selectedRole === isTeacher ? "#2563eb" : "#94a3b8"} />
+        : <GraduationCap size={20} color={selectedRole === isTeacher ? "#2563eb" : "#94a3b8"} />
+      }
+      <span style={{
+        ...styles.roleBtnLabel,
+        color: selectedRole === isTeacher ? "#1d4ed8" : "#64748b",
+      }}>
+        {isTeacher ? t("register.roleTeacher") : t("register.roleStudent")}
+      </span>
+    </button>
+  ))}
+</div>
 
           <form onSubmit={handleSubmit(onSubmit)} style={styles.form} noValidate>
             {/* Ad Soyad */}

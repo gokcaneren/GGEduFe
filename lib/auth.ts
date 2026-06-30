@@ -22,10 +22,15 @@ export const authService = {
     };
   },
 
-  async register(data: RegisterRequest): Promise<AuthResponse> {
-    const response = await api.post<AuthResponse>("/api/auth/register", data);
-    return response.data;
-  },
+  async register(data: RegisterRequest): Promise<{ success: boolean; message: string }> {
+  const response = await api.post<ApiResponse<boolean>>("/api/User/register", data);
+
+  if (!response.data.success) {
+    throw { response: { data: { message: response.data.message } } };
+  }
+
+  return { success: true, message: response.data.message };
+},
 
   logout() {
     localStorage.removeItem("token");
