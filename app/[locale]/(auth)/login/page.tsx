@@ -21,6 +21,7 @@ export default function LoginPage() {
   const [apiError, setApiError] = useState("");
   // component içinde:
 const searchParams = useSearchParams();
+const verified = searchParams.get("verified");
 const registered = searchParams.get("registered");
 
   const loginSchema = z.object({
@@ -114,6 +115,17 @@ const registered = searchParams.get("registered");
     fontSize: "14px", color: "#16a34a", marginBottom: "8px",
   }}>
     ✓ {t("login.registeredSuccess")}
+  </div>
+)}
+
+{verified === "true" && (
+  <div style={{
+    background: "#f0fdf4", border: "1px solid #bbf7d0",
+    borderRadius: "10px", padding: "12px 16px",
+    fontSize: "14px", color: "#16a34a",
+    display: "flex", alignItems: "center", gap: "8px"
+  }}>
+    ✓ {t("login.verificationSuccess")}
   </div>
 )}
           <div style={styles.formHeader}>

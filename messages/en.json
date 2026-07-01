@@ -23,7 +23,8 @@
     "noAccount": "Don't have an account?",
     "registerLink": "Sign up for free",
     "errorDefault": "Sign in failed. Please check your credentials.",
-    "registeredSuccess": "Registration successful! You can now sign in."
+    "registeredSuccess": "Registration successful! You can now sign in.",
+    "verificationSuccess": "Your email address has been verified. You can sign in."
   },
   "register": {
     "title": "Create an account",

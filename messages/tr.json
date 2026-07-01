@@ -23,7 +23,8 @@
     "noAccount": "Hesabın yok mu?",
     "registerLink": "Ücretsiz kaydol",
     "errorDefault": "Giriş yapılamadı. Bilgilerinizi kontrol edin.",
-    "registeredSuccess": "Kayıt başarılı! Şimdi giriş yapabilirsin."
+    "registeredSuccess": "Kayıt başarılı! Şimdi giriş yapabilirsin.",
+    "verificationSuccess": "E-posta adresi doğrulandı. Giriş yapabilirsin."
   },
   "register": {
     "title": "Hesap oluştur",
