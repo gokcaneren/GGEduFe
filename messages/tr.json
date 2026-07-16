@@ -116,15 +116,24 @@
   },
   "teacherLessons": {
   "title": "Derslerim",
+  "tabScheduled": "Planlanmış Dersler",
+  "tabRequests": "Gelen İstekler",
   "subtitle": "Önümüzdeki 10 gün içindeki planlanmış dersler",
   "next10days": "Sonraki 10 gün",
   "lesson": "ders",
   "minutes": "dk",
   "scheduled": "Planlandı",
+  "pending": "Bekliyor",
   "empty": "Önümüzdeki 10 günde planlanmış ders bulunamadı.",
+  "emptyRequests": "Bekleyen ders isteği bulunmuyor.",
   "errorDefault": "Dersler yüklenirken bir hata oluştu.",
   "prev": "Önceki",
-  "next": "Sonraki"
+  "next": "Sonraki",
+  "accept": "Onayla",
+  "reject": "Reddet",
+  "accepted": "Onaylandı",
+  "rejected": "Reddedildi",
+  "decideError": "İşlem sırasında bir hata oluştu."
 },
 "courseCodes": {
   "en": "İngilizce",
@@ -250,5 +259,10 @@
   "no": "Norveççe",
   "fi": "Fince",
   "th": "Tayca"
+},
+"notifications": {
+  "title": "Bildirimler",
+  "markAllRead": "Tümünü okundu işaretle",
+  "empty": "Henüz bildirim yok."
 }
 }

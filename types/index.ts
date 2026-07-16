@@ -185,3 +185,17 @@ export interface PagedResponse<T> {
   hasNext: boolean;
   hasPrevious: boolean;
 }
+
+export interface NotificationOutputDto {
+  id: string;
+  type: NotificationType;
+  title: string;
+  message: string;
+  isRead: boolean;
+  referenceId: string | null;
+  createdAt: string;
+}
+
+export type NotificationType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+// 0=BookingRequest, 1=BookingAccepted, 2=BookingRejected, 3=BookingCancelled
+// 4=SubscriptionRequest, 5=SubscriptionAccepted, 6=SubscriptionRejected

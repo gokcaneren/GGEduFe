@@ -115,16 +115,25 @@
   },
   "teacherLessons": {
   "title": "My Lessons",
+  "tabScheduled": "Scheduled Lessons",
+  "tabRequests": "Incoming Requests",
   "subtitle": "Scheduled lessons in the next 10 days",
   "next10days": "Next 10 days",
   "lesson": "lesson",
   "minutes": "min",
   "scheduled": "Scheduled",
+  "pending": "Pending",
   "empty": "No scheduled lessons found in the next 10 days.",
+  "emptyRequests": "No pending booking requests.",
   "errorDefault": "Failed to load lessons.",
   "prev": "Previous",
-  "next": "Next"
-  },
+  "next": "Next",
+  "accept": "Accept",
+  "reject": "Reject",
+  "accepted": "Accepted",
+  "rejected": "Rejected",
+  "decideError": "An error occurred."
+},
   "courseCodes": {
   "en": "English",
   "tr": "Turkish",
@@ -249,5 +258,10 @@
   "no": "Norwegian",
   "fi": "Finnish",
   "th": "Thai"
+},
+"notifications": {
+  "title": "Notifications",
+  "markAllRead": "Mark all as read",
+  "empty": "No notifications yet."
 }
 }
