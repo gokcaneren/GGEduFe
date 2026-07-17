@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Bell, Check, BookOpen, Users, Loader2 } from "lucide-react";
 import { useNotifications } from "@/hooks/useNotifications";
 import { NotificationOutputDto, NotificationType } from "@/types";
+import { useRouter } from "next/navigation";
 
 const TYPE_ICONS: Record<NotificationType, React.ReactNode> = {
   0: <BookOpen size={14} color="#2563eb" />,   // BookingRequest
@@ -35,6 +36,7 @@ export default function NotificationBell({ locale }: { locale: string }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const { notifications, unreadCount, loading, markAsRead, markAllAsRead } = useNotifications();
+  const router = useRouter();
 
   // Dışarı tıklayınca kapat
   useEffect(() => {
@@ -49,6 +51,24 @@ export default function NotificationBell({ locale }: { locale: string }) {
 
   const handleItemClick = (n: NotificationOutputDto) => {
     if (!n.isRead) markAsRead(n.id);
+
+  switch (n.type) {
+    case 0: // BookingRequest — öğretmen ders isteklerini görür
+    case 1: // BookingAccepted
+    case 2: // BookingRejected
+    case 3: // BookingCancelled
+      router.push(`/${locale}/dashboard/teacher/lessons`);
+      break;
+    case 4: // SubscriptionRequest — öğretmen sub isteklerini görür
+    case 5: // SubscriptionAccepted
+    case 6: // SubscriptionRejected
+      router.push(`/${locale}/dashboard/teacher/students`);
+      break;
+    default:
+      break;
+  }
+
+  setOpen(false);
   };
 
   return (
