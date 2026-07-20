@@ -199,3 +199,44 @@ export interface NotificationOutputDto {
 export type NotificationType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 // 0=BookingRequest, 1=BookingAccepted, 2=BookingRejected, 3=BookingCancelled
 // 4=SubscriptionRequest, 5=SubscriptionAccepted, 6=SubscriptionRejected
+
+export interface UserProfileOutputDto {
+  firstName: string;
+  lastName: string;
+  photo: string;
+  email: string;
+  gender: boolean;
+}
+
+export interface TeacherOutputDto {
+  id: string;
+  displayName: string | null;
+  bio: string | null;
+  durationMinutes: number;
+  timeZoneId: string;
+  userId: string;
+}
+
+export interface TeacherCourseProfileOutputDto {
+  id: string;
+  price: number;
+  durationMinutes: number;
+  currency: Currency;
+}
+
+export type SubscriptionStatus = 0 | 1 | 2 | 3;
+// 0=Requested, 1=Accepted, 2=Rejected, 3=Cancelled
+
+export interface TeacherAllDetailsOutputDto {
+  userProfileDetail: UserProfileOutputDto;
+  teacherProfileDetail: TeacherOutputDto;
+  teacherCourseProfileDetail: TeacherCourseProfileOutputDto;
+  teacherLanguageProfileDetails: TeacherLanguageOutputDto[];
+  subscriptionStatus: SubscriptionStatus | null;
+}
+
+export interface SubscribeState {
+  loading: boolean;
+  success: boolean;
+  error: string;
+}

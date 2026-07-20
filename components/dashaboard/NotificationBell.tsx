@@ -59,7 +59,8 @@ export default function NotificationBell({ locale }: { locale: string }) {
     case 3: // BookingCancelled
       router.push(`/${locale}/dashboard/teacher/lessons`);
       break;
-    case 4: // SubscriptionRequest — öğretmen sub isteklerini görür
+    case 4:
+      router.push(`/${locale}/dashboard/teacher/students`); // SubscriptionRequest 
     case 5: // SubscriptionAccepted
     case 6: // SubscriptionRejected
       router.push(`/${locale}/dashboard/teacher/students`);

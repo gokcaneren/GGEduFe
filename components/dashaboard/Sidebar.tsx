@@ -16,7 +16,8 @@ import {
   ChevronRight,
   BookOpenCheck,
   UserCircle,
-  Layout
+  Layout,
+  Search
 } from "lucide-react";
 import { authService } from "@/lib/auth";
 import { UserRole } from "@/types";
@@ -55,11 +56,12 @@ export default function Sidebar({ role, firstName, lastName }: SidebarProps) {
   ];
 
   const studentLinks: NavItem[] = [
-    { key: "overview",  href: `${base}/student`,            icon: <LayoutDashboard size={20} /> },
-    { key: "teachers",  href: `${base}/student/teachers`,   icon: <GraduationCap size={20} /> },
-    { key: "mylessons", href: `${base}/student/lessons`,    icon: <BookOpenCheck size={20} /> },
-    { key: "settings",  href: `${base}/student/settings`,   icon: <Settings size={20} /> },
-  ];
+  { key: "overview",   href: `${base}/student`,           icon: <LayoutDashboard size={20} /> },
+  { key: "search",     href: `${base}/student/search`,    icon: <Search size={20} /> }, 
+  { key: "teachers",   href: `${base}/student/teachers`,  icon: <GraduationCap size={20} /> },
+  { key: "mylessons",  href: `${base}/student/lessons`,   icon: <BookOpenCheck size={20} /> },
+  { key: "settings",   href: `${base}/student/settings`,  icon: <Settings size={20} /> },
+];
 
   const links = isTeacher ? teacherLinks : studentLinks;
 

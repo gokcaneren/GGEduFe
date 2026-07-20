@@ -111,7 +111,8 @@
   "expand": "Expand",
   "collapse": "Collapse",
   "roleTeacher": "Teacher",
-  "roleStudent": "Student"
+  "roleStudent": "Student",
+  "search": "Search Courses"
   },
   "teacherLessons": {
   "title": "My Lessons",
@@ -263,5 +264,32 @@
   "title": "Notifications",
   "markAllRead": "Mark all as read",
   "empty": "No notifications yet."
+},
+"courseSearch": {
+  "title": "Search Courses",
+  "subtitle": "Select a course and find teachers who offer it",
+  "selectCourse": "Select Course",
+  "selectCoursePlaceholder": "Select a course...",
+  "search": "Search",
+  "teachersFound": "{count} teachers found",
+  "emptyTeachers": "No teachers available for this course yet.",
+  "errorDefault": "An error occurred during search.",
+  "subscribe": "Subscribe",
+  "subscribed": "Following",
+  "perLesson": "/ lesson",
+  "minutes": "min",
+  "timezone": "Timezone",
+  "languages": "Languages",
+  "noBio": "No bio added yet.",
+  "noDisplayName": "Unnamed Teacher",
+  "prev": "Previous",
+  "next": "Next",
+  "subscribing": "Sending...",
+  "subscribeError": "Failed to send request.",
+  "alreadyRequested": "Request Sent",
+  "subscribeSuccess": "Follow request sent!",
+  "following": "Subscribed",
+  "requestSent": "Request Sent",
+  "requestRejected": "Rejected, Try Again"
 }
 }

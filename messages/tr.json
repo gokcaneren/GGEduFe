@@ -112,7 +112,8 @@
   "expand": "Genişlet",
   "collapse": "Daralt",
   "roleTeacher": "Öğretmen",
-  "roleStudent": "Öğrenci"
+  "roleStudent": "Öğrenci",
+  "search": "Ders Ara"
   },
   "teacherLessons": {
   "title": "Derslerim",
@@ -264,5 +265,32 @@
   "title": "Bildirimler",
   "markAllRead": "Tümünü okundu işaretle",
   "empty": "Henüz bildirim yok."
+},
+"courseSearch": {
+  "title": "Ders Ara",
+  "subtitle": "Bir ders kodu seç ve o dersi veren öğretmenleri bul",
+  "selectCourse": "Ders Seç",
+  "selectCoursePlaceholder": "Ders seçiniz...",
+  "search": "Ara",
+  "teachersFound": "{count} öğretmen bulundu",
+  "emptyTeachers": "Bu ders için henüz öğretmen bulunmuyor.",
+  "errorDefault": "Arama sırasında bir hata oluştu.",
+  "subscribe": "Abone Ol",
+  "subscribed": "Abone Olundu",
+  "perLesson": "/ ders",
+  "minutes": "dk",
+  "timezone": "Saat Dilimi",
+  "languages": "Diller",
+  "noBio": "Henüz biyografi eklenmemiş.",
+  "noDisplayName": "İsimsiz Öğretmen",
+  "prev": "Önceki",
+  "next": "Sonraki",
+  "subscribing": "Gönderiliyor...",
+  "subscribeError": "İstek gönderilemedi.",
+  "alreadyRequested": "İstek Gönderildi",
+  "subscribeSuccess": "Takip isteği gönderildi!",
+  "following": "Abone olundu.",
+  "requestSent": "İstek Gönderildi",
+  "requestRejected": "Reddedildi, Tekrar Dene"
 }
 }
