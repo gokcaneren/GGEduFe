@@ -240,3 +240,25 @@ export interface SubscribeState {
   success: boolean;
   error: string;
 }
+
+export type AvailabilityCourseSlotStatus = 0 | 1 | 2 | 3;
+// 0=Available, 1=Pending, 2=Booked, 3=Cancelled
+
+export interface AvailabilityCourseSlotOutputDto {
+  id: string;
+  startAtUtc: string;
+  endAtUtc: string;
+  status: AvailabilityCourseSlotStatus;
+  courseTemplateId: string;
+}
+
+export interface TeacherCourseWithCourseSlotOutputDto {
+  teacherCourseId: string;
+  courseId: string;
+  courseName: string;
+  courseCode: string;
+  price: number;
+  durationMinutes: number;
+  currency: Currency;
+  courseSlots: AvailabilityCourseSlotOutputDto[];
+}

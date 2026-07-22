@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Search, BookOpen, Loader2, AlertCircle,
   Clock, Globe, Languages, BadgeDollarSign,
@@ -12,6 +12,7 @@ import {
   ApiResponse, PagedResponse, CourseOutputDto,
   TeacherAllDetailsOutputDto, Currency, TeacherLanguageOutputDto, SubscribeState, SubscriptionStatus
 } from "@/types";
+import { useRouter } from "next/navigation";
 
 const PAGE_SIZE = 10;
 
@@ -23,6 +24,8 @@ export default function StudentSearchPage() {
   const t = useTranslations("courseSearch");
   const tCourse = useTranslations("courseCodes");
   const tLang = useTranslations("languageCodes");
+  const router = useRouter();
+  const locale = useLocale();
 
   const [courses, setCourses] = useState<CourseOutputDto[]>([]);
   const [selectedCode, setSelectedCode] = useState("");
@@ -134,6 +137,8 @@ export default function StudentSearchPage() {
     }));
   }
 };
+
+
 
 const getSubscriptionLabel = (
   status: SubscriptionStatus | null,
@@ -302,11 +307,24 @@ const getSubscriptionLabel = (
     state
   );
 
+  if (variant === "following") {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "6px" }}>
+        <button
+          style={styles.viewBtn}
+          onClick={() => router.push(`/${locale}/dashboard/student/teachers/${profile.id}`)}
+        >
+          <ChevronRight size={14} />
+          {t("goToLesson")}
+        </button>
+      </div>
+    );
+  }
+
   const btnStyle = {
     ...styles.viewBtn,
-    ...(variant === "following" ? styles.viewBtnSuccess : {}),
     ...(variant === "requested" ? styles.viewBtnRequested : {}),
-    ...(variant === "rejected"  ? styles.viewBtnRejected  : {}),
+    ...(variant === "rejected" ? styles.viewBtnRejected : {}),
     ...(disabled ? { cursor: "not-allowed" } : {}),
   };
 
@@ -318,8 +336,8 @@ const getSubscriptionLabel = (
         onClick={() => !disabled && handleSubscribe(profile.id)}
       >
         {state?.loading && <Loader2 size={14} style={{ animation: "spin 1s linear infinite" }} />}
-        {variant === "following" && <CheckCircle2 size={14} />}
-        {!state?.loading && variant !== "following" && <ChevronRight size={14} />}
+        {variant === "requested" && <CheckCircle2 size={14} />}
+        {!state?.loading && variant !== "requested" && <ChevronRight size={14} />}
         {label}
       </button>
       {state?.error && (

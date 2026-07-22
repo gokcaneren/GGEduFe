@@ -291,6 +291,25 @@
   "subscribeSuccess": "Takip isteği gönderildi!",
   "following": "Abone olundu.",
   "requestSent": "İstek Gönderildi",
-  "requestRejected": "Reddedildi, Tekrar Dene"
+  "requestRejected": "Reddedildi, Tekrar Dene",
+  "goToLesson": "Derse Git"
+},
+"teacherDetail": {
+  "selectCourse": "Ders Seç",
+  "availableSlots": "Müsait Saatler",
+  "noSlots": "Bu ders için müsait saat bulunmuyor.",
+  "book": "Ders İsteği Gönder",
+  "booking": "Gönderiliyor...",
+  "bookSuccess": "Ders isteği gönderildi!",
+  "bookError": "İstek gönderilemedi.",
+  "slotBooked": "Dolu",
+  "slotPending": "Bekliyor",
+  "slotAvailable": "Müsait",
+  "price": "Ücret",
+  "duration": "Süre",
+  "minutes": "dk",
+  "errorDefault": "Bilgiler yüklenemedi.",
+  "notSubscribed": "Bu öğretmeni takip etmiyorsunuz.",
+  "back": "Geri"
 }
 }

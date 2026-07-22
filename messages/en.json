@@ -290,6 +290,25 @@
   "subscribeSuccess": "Follow request sent!",
   "following": "Subscribed",
   "requestSent": "Request Sent",
-  "requestRejected": "Rejected, Try Again"
+  "requestRejected": "Rejected, Try Again",
+  "goToLesson": "Go to Lesson"
+},
+"teacherDetail": {
+  "selectCourse": "Select Course",
+  "availableSlots": "Available Slots",
+  "noSlots": "No available slots for this course.",
+  "book": "Send Booking Request",
+  "booking": "Sending...",
+  "bookSuccess": "Booking request sent!",
+  "bookError": "Failed to send request.",
+  "slotBooked": "Booked",
+  "slotPending": "Pending",
+  "slotAvailable": "Available",
+  "price": "Price",
+  "duration": "Duration",
+  "minutes": "min",
+  "errorDefault": "Failed to load details.",
+  "notSubscribed": "You are not following this teacher.",
+  "back": "Back"
 }
 }
