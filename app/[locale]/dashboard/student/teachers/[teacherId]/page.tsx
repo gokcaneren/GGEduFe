@@ -12,6 +12,7 @@ import {
   ApiResponse, TeacherCourseWithCourseSlotOutputDto,
   AvailabilityCourseSlotOutputDto, TeacherAllDetailsOutputDto,
   PagedResponse,
+  SubbedTeacherDetailOutputDto,
 } from "@/types";
 
 const CURRENCY_LABELS: Record<number, string> = {
@@ -45,38 +46,44 @@ export default function TeacherDetailPage() {
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingError, setBookingError] = useState("");
 
+  const [teacherDetail, setTeacherDetail] = useState<SubbedTeacherDetailOutputDto | null>(null);
+const [detailLoading, setDetailLoading] = useState(true);
+const [detailError, setDetailError] = useState("");
+
   // ── Öğretmenin kurslarını çek ──
   useEffect(() => {
-    const fetchTeacherCourses = async () => {
-      try {
-        // Tüm course'ları çek, öğretmenin verdiği kursları bul
-        const res = await api.get<ApiResponse<PagedResponse<TeacherAllDetailsOutputDto>>>(
-          `/api/Course/teacher/${teacherId}/courses`
-        );
-        // Eğer bu endpoint yoksa aşağıdaki alternatifi kullan
-      } catch {
-        // sessiz
-      }
-    };
+  const fetchTeacherDetail = async () => {
+    setDetailLoading(true);
+    setDetailError("");
+    try {
+      const res = await api.get<ApiResponse<SubbedTeacherDetailOutputDto>>(
+        `/api/Subscription/subbed/teacher/${teacherId}/details`
+      );
 
-    // Alternatif: teacher details endpoint'inden kursları çek
-    const fetchFromTeacherDetails = async () => {
-      try {
-        const res = await api.get<ApiResponse<{ teacherCourses: { id: string; code: string; name: string }[] }>>(
-          `/api/Teacher/${teacherId}/details`
-        );
-        if (res.data.success && res.data.data?.teacherCourses) {
-          const courses = res.data.data.teacherCourses;
-          setTeacherCourses(courses);
-          if (courses.length > 0) setSelectedCourseCode(courses[0].code);
-        }
-      } catch {
-        // sessiz
+      if (!res.data.success || !res.data.data) {
+        setDetailError(res.data.message || t("errorDefault"));
+        return;
       }
-    };
 
-    fetchFromTeacherDetails();
-  }, [teacherId]);
+      const data = res.data.data;
+      setTeacherDetail(data);
+
+      // Kursları set et
+      if (data.teacherCourses && data.teacherCourses.length > 0) {
+        setTeacherCourses(
+          data.teacherCourses.map((c) => ({ id: c.id, code: c.code }))
+        );
+        setSelectedCourseCode(data.teacherCourses[0].code);
+      }
+    } catch {
+      setDetailError(t("errorDefault"));
+    } finally {
+      setDetailLoading(false);
+    }
+  };
+
+  fetchTeacherDetail();
+}, [teacherId]);
 
   // ── Slot fetch ──
   const fetchSlots = useCallback(async (courseCode: string) => {
@@ -169,9 +176,46 @@ export default function TeacherDetailPage() {
       </button>
 
       <div style={styles.layout}>
+
+        
         {/* Sol: kurs seçimi + slot listesi */}
         <div style={styles.leftCol}>
+{/* Öğretmen profil kartı */}
+{detailLoading && (
+  <div style={styles.centered}>
+    <Loader2 size={24} color="#2563eb" style={{ animation: "spin 1s linear infinite" }} />
+  </div>
+)}
 
+{detailError && (
+  <div style={styles.errorBox}>
+    <AlertCircle size={15} color="#dc2626" />
+    <span>{detailError}</span>
+  </div>
+)}
+
+{teacherDetail && !detailLoading && (
+  <div style={styles.card}>
+    <div style={styles.profileRow}>
+      <div style={styles.profileAvatar}>
+        {teacherDetail.photo
+          ? <img src={teacherDetail.photo} alt="" style={styles.avatarImg} />
+          : <span style={styles.avatarInitials}>
+              {teacherDetail.firstName[0]}{teacherDetail.lastName[0]}
+            </span>
+        }
+      </div>
+      <div>
+        <p style={styles.profileName}>
+          {teacherDetail.displayName ?? `${teacherDetail.firstName} ${teacherDetail.lastName}`}
+        </p>
+        <p style={styles.profileSubName}>
+          {teacherDetail.firstName} {teacherDetail.lastName}
+        </p>
+      </div>
+    </div>
+  </div>
+)}
           {/* Kurs seçimi */}
           {teacherCourses.length > 0 && (
             <div style={styles.card}>
@@ -426,4 +470,26 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
   },
   bookBtnDisabled: { background: "#93c5fd", cursor: "not-allowed" },
+
+  profileRow: {
+  display: "flex", alignItems: "center", gap: "14px",
+},
+profileAvatar: {
+  width: "56px", height: "56px", borderRadius: "50%",
+  background: "#dbeafe", display: "flex", alignItems: "center",
+  justifyContent: "center", flexShrink: 0, overflow: "hidden",
+},
+avatarImg: { width: "100%", height: "100%", objectFit: "cover" },
+avatarInitials: {
+  fontSize: "18px", fontWeight: "700", color: "#1d4ed8",
+  fontFamily: "'DM Sans', sans-serif",
+},
+profileName: {
+  fontSize: "18px", fontWeight: "600", color: "#1a1a2e",
+  fontFamily: "'DM Serif Display', serif",
+},
+profileSubName: {
+  fontSize: "13px", color: "#94a3b8", marginTop: "2px",
+  fontFamily: "'DM Sans', sans-serif",
+},
 };

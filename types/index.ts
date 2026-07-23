@@ -262,3 +262,13 @@ export interface TeacherCourseWithCourseSlotOutputDto {
   currency: Currency;
   courseSlots: AvailabilityCourseSlotOutputDto[];
 }
+
+export interface SubbedTeacherDetailOutputDto {
+  teacherId: string;
+  firstName: string;
+  lastName: string;
+  displayName: string | null;
+  photo: string;
+  gender: boolean;
+  teacherCourses: TeacherCourseOutputDto[] | null;
+}
