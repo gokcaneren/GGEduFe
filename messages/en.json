@@ -310,5 +310,20 @@
   "errorDefault": "Failed to load details.",
   "notSubscribed": "You are not following this teacher.",
   "back": "Back"
+},
+"studentTeachers": {
+  "title": "My Teachers",
+  "tabFollowing": "Following",
+  "tabPending": "Pending Requests",
+  "emptyFollowing": "You are not following any teachers yet.",
+  "emptyPending": "No pending subscription requests.",
+  "goToLesson": "Go to Lesson",
+  "courses": "Courses",
+  "noCourses": "No course info.",
+  "errorDefault": "Failed to load teachers.",
+  "prev": "Previous",
+  "next": "Next",
+  "perLesson": "/ lesson",
+  "minutes": "min"
 }
 }

@@ -311,5 +311,20 @@
   "errorDefault": "Bilgiler yüklenemedi.",
   "notSubscribed": "Bu öğretmeni takip etmiyorsunuz.",
   "back": "Geri"
+},
+"studentTeachers": {
+  "title": "Öğretmenlerim",
+  "tabFollowing": "Takip Ettiklerim",
+  "tabPending": "Bekleyen İstekler",
+  "emptyFollowing": "Henüz takip ettiğin öğretmen yok.",
+  "emptyPending": "Bekleyen abonelik isteğin yok.",
+  "goToLesson": "Derse Git",
+  "courses": "Kurslar",
+  "noCourses": "Kurs bilgisi yok.",
+  "errorDefault": "Öğretmenler yüklenirken bir hata oluştu.",
+  "prev": "Önceki",
+  "next": "Sonraki",
+  "perLesson": "/ ders",
+  "minutes": "dk"
 }
 }
